@@ -11,7 +11,6 @@ A Flask web application that analyzes ID document images for signs of digital ma
 - [Overview](#overview)
 - [Features](#features)
 - [Live Demo](#live-demo)
-- [Quick Start (Local)](#quick-start-local)
 - [How It Works](#how-it-works)
 - [Detection Techniques](#detection-techniques)
 - [Scoring System](#scoring-system)
@@ -56,36 +55,6 @@ The application is deployed on Render and accessible at:
 **[https://forgery-detector-pt2k.onrender.com](https://forgery-detector-pt2k.onrender.com)**
 
 You can upload the sample images included in this repository (`samples/genuine/` and `samples/tampered/`) to see the detection in action.
-
----
-
-## Quick Start (Local)
-
-### Prerequisites
-
-- Python 3.8+
-
-### Steps
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/merinm488/forgery-detector.git
-cd LucidPlus
-
-# 2. Create and activate a virtual environment
-python -m venv venv
-source venv/bin/activate        # Linux/Mac
-# venv\Scripts\activate         # Windows
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Generate sample test images (optional)
-python create_samples.py
-
-# 5. Run the application
-python app.py
-```
 
 ---
 
