@@ -87,10 +87,6 @@ python create_samples.py
 python app.py
 ```
 
-Open **http://localhost:8005** in your browser.
-
-To access from other devices on the same network, use **http://\<your-local-ip\>:8005**.
-
 ---
 
 ## How It Works
