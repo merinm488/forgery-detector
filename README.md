@@ -2,7 +2,7 @@
 
 A Flask web application that analyzes ID document images for signs of digital manipulation using 5 algorithmic forgery detection techniques. No machine learning models required — built entirely with **Pillow** and **NumPy**.
 
-**Live Demo:** [https://lucidplus.onrender.com](https://lucidplus.onrender.com)
+**Live Demo:** [https://forgery-detector-pt2k.onrender.com](https://forgery-detector-pt2k.onrender.com)
 
 ---
 
@@ -53,7 +53,7 @@ The system analyzes uploaded images through 5 complementary detection techniques
 
 The application is deployed on Render and accessible at:
 
-**[https://lucidplus.onrender.com](https://lucidplus.onrender.com)**
+**[https://forgery-detector-pt2k.onrender.com](https://forgery-detector-pt2k.onrender.com)**
 
 You can upload the sample images included in this repository (`samples/genuine/` and `samples/tampered/`) to see the detection in action.
 
@@ -69,7 +69,7 @@ You can upload the sample images included in this repository (`samples/genuine/`
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<your-username>/LucidPlus.git
+git clone https://github.com/merinm488/forgery-detector.git
 cd LucidPlus
 
 # 2. Create and activate a virtual environment
