@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Analysis Report — {{ result.analysis_id }}{% endblock %}
+{% block content %}
+<div class="report-page">
+    <!-- Risk Summary -->
+    <div class="risk-summary">
+        <div class="risk-score-ring" data-score="{{ result.overall_score }}">
+            <span class="risk-score-value">{{ "%.1f"|format(result.overall_score * 100) }}</span>
+            <span class="risk-score-label">/ 100</span>
+        </div>
+        <div class="risk-info">
+            <h1>Analysis Report</h1>
+            <div class="risk-badge risk-badge-{{ result.risk_level|lower|replace('-', '_') }}">
+                {{ result.risk_level }}
+            </div>
+            <p class="risk-description">{{ result.risk_description }}</p>
+            <p class="meta">ID: {{ result.analysis_id }} &middot; {{ result.timestamp }} &middot; {{ result.processing_time }}s</p>
+        </div>
+    </div>
+
+    <!-- Score Breakdown -->
+    <div class="section">
+        <h2>Technique Breakdown</h2>
+        <div class="score-bars">
+            {% for technique, data in result.breakdown.items() %}
+            <div class="score-row">
+                <div class="score-label">
+                    {{ technique.replace('_', ' ')|title }}
+                    <span class="score-weight">(weight: {{ data.weight }})</span>
+                </div>
+                <div class="score-bar-container">
+                    <div class="score-bar" style="width: {{ (data.score * 100)|round(1) }}%;" data-score="{{ data.score }}"></div>
+                </div>
+                <div class="score-value">{{ (data.score * 100)|round(1) }}%</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Images -->
+    {% if result.breakdown.ela.visualization_path %}
+    <div class="section">
+        <h2>Visual Analysis</h2>
+        <div class="image-comparison">
+            <div class="image-panel">
+                <h3>Original Document</h3>
+                <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Original" class="analysis-image">
+            </div>
+            <div class="image-panel">
+                <h3>ELA Heatmap</h3>
+                <img src="{{ url_for('static', filename=result.breakdown.ela.visualization_path) }}" alt="ELA" class="analysis-image">
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Findings -->
+    <div class="section">
+        <h2>Detailed Findings</h2>
+        <div class="findings-list">
+            {% for item in result.findings %}
+            <div class="finding-item">
+                <span class="finding-technique">{{ item.technique }}</span>
+                <span class="finding-text">{{ item.finding }}</span>
+                <span class="finding-score">{{ (item.score * 100)|round(1) }}%</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Raw Details (collapsible) -->
+    <div class="section">
+        <details class="raw-details">
+            <summary>Raw Analysis Data</summary>
+            <pre class="raw-json">{{ result | tojson(indent=2) }}</pre>
+        </details>
+    </div>
+
+    <a href="{{ url_for('index') }}" class="analyze-btn" style="display:inline-block; text-align:center; text-decoration:none; margin-top:1rem;">Analyze Another Document</a>
+</div>
+{% endblock %}

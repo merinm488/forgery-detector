@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: lucidplus
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    plan: free
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.6"
+      - key: FLASK_ENV
+        value: production

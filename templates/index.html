@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Upload Document — ID Forgery Detector{% endblock %}
+{% block content %}
+<div class="upload-page">
+    <div class="upload-header">
+        <h1>ID Document Forgery Detection</h1>
+        <p class="subtitle">Upload an ID document image to analyze it for signs of digital manipulation.</p>
+    </div>
+
+    {% if error %}
+    <div class="error-banner">{{ error }}</div>
+    {% endif %}
+
+    <form action="{{ url_for('index') }}" method="POST" enctype="multipart/form-data" id="upload-form">
+        <div class="drop-zone" id="drop-zone">
+            <div class="drop-zone-content">
+                <div class="drop-icon">&#128196;</div>
+                <p class="drop-text">Drag & drop your ID document image here</p>
+                <p class="drop-subtext">or click to browse</p>
+                <p class="drop-formats">Supported: PNG, JPG, JPEG, BMP, TIFF, WEBP (max 16 MB)</p>
+            </div>
+            <input type="file" name="document" id="file-input" accept=".png,.jpg,.jpeg,.bmp,.tiff,.webp" hidden>
+        </div>
+
+        <div class="preview-section" id="preview-section" style="display:none;">
+            <div class="preview-container">
+                <img id="preview-image" src="" alt="Preview">
+                <button type="button" class="remove-btn" id="remove-btn">&times; Remove</button>
+            </div>
+            <p class="preview-name" id="preview-name"></p>
+        </div>
+
+        <button type="submit" class="analyze-btn" id="analyze-btn" disabled>
+            Analyze Document
+        </button>
+    </form>
+
+    <div class="info-cards">
+        <div class="info-card">
+            <h3>5 Detection Techniques</h3>
+            <p>Error Level Analysis, Metadata Inspection, Noise Patterns, Edge Detection, Copy-Move Detection</p>
+        </div>
+        <div class="info-card">
+            <h3>Weighted Scoring</h3>
+            <p>Each technique contributes a weighted score to produce an overall risk assessment.</p>
+        </div>
+        <div class="info-card">
+            <h3>No ML Required</h3>
+            <p>Purely algorithmic analysis using Pillow &amp; NumPy — fast, transparent, and interpretable.</p>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
